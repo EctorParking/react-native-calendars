@@ -12,7 +12,7 @@ import styleConstructor from './style';
 class Day extends Component {
   static propTypes = {
     // TODO: disabled props should be removed
-    state: PropTypes.oneOf(['disabled', 'today', '']),
+    state: PropTypes.oneOf(['disabled', 'today', 'style-disabled', '']),
 
     // Specify theme properties to override specific styles for calendar parts. Default = {}
     theme: PropTypes.object,
@@ -51,7 +51,7 @@ class Day extends Component {
         marking: true
       };
     }
-    const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
+    const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state.includes('disabled');
     let dot;
     if (marking.marked) {
       dotStyle.push(this.style.visibleDot);
