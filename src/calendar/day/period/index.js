@@ -11,6 +11,12 @@ import isEqual from 'lodash.isequal';
 import * as defaultStyle from '../../../style';
 import styleConstructor from './style';
 
+import {
+  TODAY_DATE,
+  DISABLED_DATE,
+  SELECTABLE_DATE
+} from '../../../testIDs';
+
 class Day extends Component {
   static propTypes = {
     // TODO: selected + disabled props should be removed
@@ -120,7 +126,9 @@ class Day extends Component {
     let fillerStyle = {};
     let fillers;
 
-    if (this.props.state === 'disabled') {
+    const isDisabled = this.props.state === 'disabled';
+
+    if (isDisabled) {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
       containerStyle.push(this.style.today);
@@ -191,8 +199,18 @@ class Day extends Component {
       );
     }
 
+    let testID;
+    if (this.props.state === 'today') {
+      testID = TODAY_DATE;
+    } else if (isDisabled) {
+      testID = DISABLED_DATE;
+    } else {
+      testID = SELECTABLE_DATE;
+    }
+
     return (
       <TouchableWithoutFeedback
+        testID={testID}
         onPress={this.onDayPress}
         onLongPress={this.onDayLongPress}>
         <View style={this.style.wrapper}>
