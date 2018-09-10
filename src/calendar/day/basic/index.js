@@ -9,6 +9,12 @@ import {shouldUpdate} from '../../../component-updater';
 
 import styleConstructor from './style';
 
+import {
+  TODAY_DATE,
+  DISABLED_DATE,
+  SELECTABLE_DATE
+} from '../../../testIDs';
+
 class Day extends Component {
   static propTypes = {
     // TODO: disabled props should be removed
@@ -44,6 +50,7 @@ class Day extends Component {
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
     const dotStyle = [this.style.dot];
+    let testID;
 
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
@@ -62,6 +69,7 @@ class Day extends Component {
     }
 
     if (marking.selected) {
+      testID = SELECTABLE_DATE;
       containerStyle.push(this.style.selected);
       if (marking.selectedColor) {
         containerStyle.push({backgroundColor: marking.selectedColor});
@@ -69,14 +77,17 @@ class Day extends Component {
       dotStyle.push(this.style.selectedDot);
       textStyle.push(this.style.selectedText);
     } else if (isDisabled) {
+      testID = DISABLED_DATE;
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
+      testID = TODAY_DATE;
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
     }
 
     return (
       <TouchableOpacity
+        testID={testID}
         style={containerStyle}
         onPress={this.onDayPress}
         onLongPress={this.onDayLongPress}
