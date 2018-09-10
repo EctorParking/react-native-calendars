@@ -67,6 +67,8 @@ class Day extends Component {
       testID = TODAY_DATE;
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
+    } else {
+      testID = SELECTABLE_DATE;
     }
 
     if (marking.customStyles && typeof marking.customStyles === 'object') {
