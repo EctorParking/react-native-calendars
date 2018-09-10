@@ -71,27 +71,22 @@ class Day extends Component {
     const dot = this.renderDots(marking);
 
     const isDisabled = (typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled');
+    let testID;
 
     if (marking.selected) {
+      testID = SELECTABLE_DATE;
       containerStyle.push(this.style.selected);
       textStyle.push(this.style.selectedText);
       if (marking.selectedColor) {
         containerStyle.push({backgroundColor: marking.selectedColor});
       }
     } else if (isDisabled) {
+      testID = DISABLED_DATE;
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
+      testID = TODAY_DATE;
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
-    }
-
-    let testID;
-    if (this.props.state === 'today') {
-      testID = TODAY_DATE;
-    } else if (isDisabled) {
-      testID = DISABLED_DATE;
-    } else {
-      testID = SELECTABLE_DATE;
     }
 
     return (

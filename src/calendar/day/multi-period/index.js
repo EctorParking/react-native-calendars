@@ -85,24 +85,19 @@ class Day extends Component {
         ? marking.disabled
         : this.props.state === 'disabled'
     );
+    let testID;
 
     if (marking.selected) {
+      testID = SELECTABLE_DATE;
       containerStyle.push(this.style.selected);
       textStyle.push(this.style.selectedText);
     } else if (isDisabled) {
+      testID = DISABLED_DATE;
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
+      testID = TODAY_DATE;
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
-    }
-
-    let testID;
-    if (this.props.state === 'today') {
-      testID = TODAY_DATE;
-    } else if (isDisabled) {
-      testID = DISABLED_DATE;
-    } else {
-      testID = SELECTABLE_DATE;
     }
 
     return (

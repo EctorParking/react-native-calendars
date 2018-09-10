@@ -13,8 +13,7 @@ import styleConstructor from './style';
 
 import {
   TODAY_DATE,
-  DISABLED_DATE,
-  SELECTABLE_DATE
+  DISABLED_DATE
 } from '../../../testIDs';
 
 class Day extends Component {
@@ -127,10 +126,13 @@ class Day extends Component {
     let fillers;
 
     const isDisabled = this.props.state === 'disabled';
+    let testID;
 
     if (isDisabled) {
+      testID = DISABLED_DATE;
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
+      testID = TODAY_DATE;
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
     }
@@ -197,15 +199,6 @@ class Day extends Component {
           <View style={[this.style.rightFiller, rightFillerStyle]}/>
         </View>
       );
-    }
-
-    let testID;
-    if (this.props.state === 'today') {
-      testID = TODAY_DATE;
-    } else if (isDisabled) {
-      testID = DISABLED_DATE;
-    } else {
-      testID = SELECTABLE_DATE;
     }
 
     return (
